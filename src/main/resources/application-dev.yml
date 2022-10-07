@@ -1,0 +1,21 @@
+
+https:
+  connectionTimeout: 50
+  keepAliveTimeout: 10
+  readTimeout: 10000
+  writeTimeout: 10000
+  callTimeout: 10000
+
+person:
+  name: ming
+  age: ${random.int}  # 随机int
+  is-lived: true
+  birth: 2000-01-01
+  info: {sex: man, profession: programmer}
+  hobbies:
+    - code
+    - music
+  pet:
+    species: dog
+    name: ${person.name:other}_旺财
+
