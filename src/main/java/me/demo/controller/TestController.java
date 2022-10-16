@@ -8,8 +8,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
+import me.demo.aspect.LimitRequest;
 import me.demo.bean.Person;
 import me.demo.utils.HttpsUtils;
+import me.demo.utils.MessageUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,10 +34,11 @@ public class TestController {
   @Resource
   HttpsUtils httpsUtils;
 
+  @LimitRequest
   @GetMapping("/index")
   public String hello(@NotEmpty String a, @RequestParam String b) {
     log.info("Hello");
-    return person.toString();
+    return MessageUtils.getMessage("hello", person.toString());
   }
 
   @PostMapping("/http-bin")

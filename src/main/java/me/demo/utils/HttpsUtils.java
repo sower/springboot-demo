@@ -52,7 +52,7 @@ public class HttpsUtils {
   public static MediaType JSON_MEDIA_TYPE = MediaType.get("application/json; charset=utf-8");
 
   private Request.Builder request;
-  public Map<String, String> headers;
+  private Map<String, String> headers;
   private RequestBody body;
 
   private final boolean isReset = true;
@@ -67,13 +67,11 @@ public class HttpsUtils {
 //      .certificatePinner(certificatePinner) // certificate pinning
 //      .addNetworkInterceptor(interceptor) // network level interceptor
 //      .authenticator(authenticator) // authenticator for requests (it supports similar use-cases as "Authorization header" earlier
-        .callTimeout(
-            clientConfig.getCallTimeout(), TimeUnit.SECONDS) // default timeout for complete calls
-        .readTimeout(
-            clientConfig.getReadTimeout(),
+        .callTimeout(clientConfig.getCallTimeout(),
+            TimeUnit.SECONDS) // default timeout for complete calls
+        .readTimeout(clientConfig.getReadTimeout(),
             TimeUnit.SECONDS) // default read timeout for new connections
-        .writeTimeout(
-            clientConfig.getWriteTimeout(),
+        .writeTimeout(clientConfig.getWriteTimeout(),
             TimeUnit.SECONDS) // default write timeout for new connections
 //      .dns(dns) // DNS service used to lookup IP addresses for hostnames
 //      .followRedirects(true) // follow requests redirects

@@ -1,5 +1,7 @@
 package me.demo.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -9,6 +11,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  * @date 2022/10/07
  **/
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageUtils {
 
   /**
