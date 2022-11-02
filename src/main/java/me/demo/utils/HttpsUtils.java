@@ -30,7 +30,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
-import okio.BufferedSource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -277,8 +276,8 @@ public class HttpsUtils {
       log.info("request headers: {}", request.headers());
 
       RequestBody requestBody = request.body();
-      Buffer buffer = new Buffer();
       if (requestBody != null) {
+        Buffer buffer = new Buffer();
         requestBody.writeTo(buffer);
         log.info("request body: {}", buffer.readUtf8());
       }
@@ -287,12 +286,13 @@ public class HttpsUtils {
 
       log.info("<=== Received response code is {} , response headers: {}", response.code(),
           response.headers());
-      ResponseBody responseBody = response.body();
-      if (responseBody != null) {
-        BufferedSource source = responseBody.source();
-        source.request(Long.MAX_VALUE);
-        buffer = source.getBuffer();
-        log.info("response body:{}", buffer.clone().readUtf8());
+
+      ResponseBody responseBody = null;
+      try {
+        responseBody = response.peekBody(Long.MAX_VALUE);
+        log.info("response body:{}", responseBody.string());
+      } catch (Exception e) {
+        log.warn("response body is null : {}", e.getMessage());
       }
 
       return response;

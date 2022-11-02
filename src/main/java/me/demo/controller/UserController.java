@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import me.demo.aspect.RateLimit;
 import me.demo.bean.entity.User;
 import me.demo.repository.UserDao;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class UserController {
   private UserDao userDao;
 
   @GetMapping("/user")
+  @RateLimit(value = 1.0)
   public List<User> queryUser() {
 
     return userDao.findAll();
