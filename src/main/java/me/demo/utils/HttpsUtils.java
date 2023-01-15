@@ -234,7 +234,7 @@ public class HttpsUtils {
   /**
    * 生成安全套接字工厂，用于https请求的证书跳过
    */
-  private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
+  public static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
     SSLSocketFactory ssfFactory = null;
     try {
       SSLContext sc = SSLContext.getInstance("TLS");
@@ -246,7 +246,7 @@ public class HttpsUtils {
     return ssfFactory;
   }
 
-  private static TrustManager[] buildTrustManagers() {
+  public static TrustManager[] buildTrustManagers() {
     return new TrustManager[]{
         new X509TrustManager() {
           @Override
@@ -265,7 +265,7 @@ public class HttpsUtils {
     };
   }
 
-  static class BasicLoggingInterceptor implements Interceptor {
+  public static class BasicLoggingInterceptor implements Interceptor {
 
     @NotNull
     @Override

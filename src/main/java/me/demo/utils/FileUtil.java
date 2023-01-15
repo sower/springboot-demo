@@ -2,11 +2,13 @@ package me.demo.utils;
 
 import com.alibaba.fastjson.JSON;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * @description
@@ -28,6 +30,8 @@ public class FileUtil {
     File file = initFileDirectory(fileName);
     if (fileContent instanceof byte[]) {
       FileUtils.writeByteArrayToFile(file, (byte[]) fileContent);
+    } else if (fileContent instanceof InputStream) {
+      FileUtils.copyToFile((InputStream) fileContent, file);
     } else if (fileContent instanceof URL) {
       FileUtils.copyURLToFile((URL) fileContent, file);
     } else if (fileContent instanceof String) {
@@ -37,5 +41,10 @@ public class FileUtil {
     }
     log.info("Build file {} successfully, size is {}", fileName,
         FileUtils.byteCountToDisplaySize(file.length()));
+  }
+
+  public String concat(String... element) {
+    String path = String.join(File.separator, element);
+    return FilenameUtils.normalize(path);
   }
 }

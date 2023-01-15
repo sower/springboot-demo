@@ -115,12 +115,12 @@ spring:
           slow-sql-millis: 1000
           merge-sql: true
         wall:
-#          enabled: true  # 开启SQL防火墙功能
+          #          enabled: true  # 开启SQL防火墙功能
           config:
             multi-statement-allow: true
-#            select-allow: true # 允许执行Select查询操作
-#            delete-allow: false # 不允许执行delete操作
-#            create-table-allow: false # 不允许创建表
+  #            select-allow: true # 允许执行Select查询操作
+  #            delete-allow: false # 不允许执行delete操作
+  #            create-table-allow: false # 不允许创建表
 
 
   # Quartz 的配置，对应 QuartzProperties 配置类
@@ -157,3 +157,5 @@ logging:
     org.hibernate.engine.QueryParameters: debug
     org.hibernate.engine.query.HQLQueryPlan: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
+    me:
+      demo: debug

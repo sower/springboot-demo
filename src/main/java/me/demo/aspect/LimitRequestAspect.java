@@ -12,6 +12,7 @@ import me.demo.Exception.CommonException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -34,6 +35,7 @@ public class LimitRequestAspect {
     // 获得请求
     ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     HttpServletRequest request = attributes.getRequest();
+    MDC.put("taskId", request.getRemoteAddr());
     HttpServletResponse response = attributes.getResponse();
 
     Cache<String, Integer> ipCounter = RECORDER.get(request.getRequestURI());
@@ -45,12 +47,14 @@ public class LimitRequestAspect {
     int count = ipCounter.get(request.getRemoteAddr(), () -> 0);
     if (count >= limitRequest.count()) { // 超过次数，不执行目标方法
       response.addIntHeader("X-LIMIT-REQUEST", count);
+      MDC.remove("taskId");
       throw new CommonException("Request access too fast, out of limit.");
     }
     // 未超过次数，记录加一
     ipCounter.put(request.getRemoteAddr(), count + 1);
     RECORDER.put(request.getRequestURI(), ipCounter);
     log.info("cache is {}", ipCounter.asMap());
+    MDC.remove("taskId");
   }
 
 }
