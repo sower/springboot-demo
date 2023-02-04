@@ -2,11 +2,11 @@ package me.demo.controller;
 
 import java.util.List;
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import me.demo.aspect.RateLimit;
 import me.demo.bean.entity.User;
 import me.demo.repository.UserDao;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +30,7 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public User createUser(@Valid @RequestBody User user) {
+  public User createUser(@RequestBody @Validated User user) {
     userDao.save(user);
     return user;
   }

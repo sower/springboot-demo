@@ -40,8 +40,8 @@ public class GlobalExceptionHandler {
   protected Result<?> handleBindException(BindException ex) {
     List<Map<String, Object>> list = ex.getFieldErrors().stream().map(this::fieldErrorToMap)
         .collect(Collectors.toList());
-
-    Result<Object> result = Result.failed("Valid error");
+    log.warn("bean validate exception: {}", ex.getMessage());
+    Result<Object> result = Result.failed("Valid bean error");
     result.setData(list);
     return result;
   }
@@ -54,6 +54,7 @@ public class GlobalExceptionHandler {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ResponseBody
   public Result<?> handleConstraintViolationException(ConstraintViolationException ex) {
+    log.warn("Valid params failed: {}", ex.getMessage());
     return Result.failed(ex.getMessage());
   }
 

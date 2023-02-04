@@ -25,6 +25,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
 import lombok.Data;
+import me.demo.aspect.AnyOf;
 import me.demo.constant.Gender;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -48,6 +49,7 @@ public class User implements Serializable {
   private int id;
 
   @NotBlank(message = "Name must be not blank")
+  @AnyOf(values = {"abc", "Tom"},message = "only special values")
   @Column(unique = true)
   private String name;
 

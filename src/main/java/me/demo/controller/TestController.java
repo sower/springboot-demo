@@ -17,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -40,7 +39,7 @@ public class TestController {
 
   @LimitRequest
   @GetMapping("/index")
-  public String hello(@NotEmpty String a, @RequestParam String b) {
+  public String hello(@NotEmpty String a, String b) {
     log.info("Hello {} - {}", feignService.uuid(), feignService.get("test"));
 
     return MessageUtils.getMessage("hello", person.toString());
