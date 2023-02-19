@@ -1,0 +1,56 @@
+Configuration:
+  status: info # 用于控制log4j2日志框架本身的日志级别
+  monitorInterval: 30 # 每隔多少秒重新读取配置文件，可以不重启应用的情况下修改配置
+
+  Properties: # 定义全局变量
+    Property:
+      - name: log.level.console
+        value: info
+      - name: log.path
+        value: /logs
+      - name: project.name
+        value: Demo
+      - name: log.pattern
+        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-30.30C{1.} : %m%n"
+
+  Appenders:
+    Console: # 输出到控制台
+      name: CONSOLE
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%5p [%X{traceId}] %t %l - %m%n"
+
+  #        RollingFile: # 打印到文件
+  #            - name: ROLLING_FILE
+  #                # fileName  指定当前日志文件的位置和文件名称
+  #              fileName: ${log.path}/${project.name}.log
+  #                # filePattern  指定当发生Rolling时，文件的转移和重命名规则
+  #              filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+  #              PatternLayout:
+  #                  pattern: ${log.pattern}
+  #              Filters:
+  #                  ThresholdFilter:
+  #                      - level: ${sys:log.level.console}
+  #                        onMatch: ACCEPT
+  #                        onMismatch: DENY
+  #              Policies:
+  #                  TimeBasedTriggeringPolicy:  # 按天分类
+  #                      modulate: true
+  #                      interval: 1
+  #                  SizedTriggeringPolicy:  # zip when up to 50MB
+  #                      size: "50 MB"
+  #              DefaultRolloverStrategy:
+  #                  max: 100     # 文件最多100个
+  #                  Delete:
+  #                      basePath: "${log.path}"
+  #                      maxDepth: "2"
+  #                      IfLastModified:
+  #                          age: "14d"
+
+  Loggers:
+    #日志器分根日志器Root和自定义日志器，当根据日志名字获取不到指定的日志器时就使用Root作为默认的日志器
+    Root:
+      level: info
+      AppenderRef:
+        - ref: CONSOLE
+#                - ref: ROLLING_FILE
