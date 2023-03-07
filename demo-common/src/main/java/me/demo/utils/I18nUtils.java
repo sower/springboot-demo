@@ -13,7 +13,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MessageUtils {
+public class I18nUtils {
 
   /**
    * 根据消息键和参数 获取消息 委托给spring messageSource

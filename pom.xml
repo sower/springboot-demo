@@ -8,8 +8,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.8</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>2.7.9</version>
+    <relativePath/>
   </parent>
 
   <groupId>me.demo</groupId>
@@ -21,10 +21,14 @@
   <modules>
     <module>demo-common</module>
     <module>demo-web</module>
+    <module>demo-quartz</module>
   </modules>
 
   <properties>
-    <java.version>8</java.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <java.version>11</java.version>
+    <spring-boot.version>2.7.9</spring-boot.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <druid.version>1.2.8</druid.version>
@@ -68,10 +72,10 @@
       <artifactId>jackson-dataformat-yaml</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-webflux</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--    </dependency>-->
 
 
     <!-- 导入配置文件处理器，配置文件进行绑定就会有提示 -->
@@ -133,16 +137,6 @@
       <groupId>com.alibaba</groupId>
       <artifactId>druid-spring-boot-starter</artifactId>
       <version>${druid.version}</version>
-    </dependency>
-
-    <!--    <dependency>-->
-    <!--      <groupId>org.quartz-scheduler</groupId>-->
-    <!--      <artifactId>quartz</artifactId>-->
-    <!--      <version>2.3.2</version>-->
-    <!--    </dependency>-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-quartz</artifactId>
     </dependency>
 
     <!--    Test-->

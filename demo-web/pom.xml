@@ -12,34 +12,55 @@
 
   <artifactId>demo-web</artifactId>
 
-  <properties>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
-  </properties>
 
   <dependencies>
     <dependency>
       <groupId>me.demo</groupId>
       <artifactId>demo-common</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>me.demo</groupId>
+      <artifactId>demo-quartz</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
   </dependencies>
 
 
   <!-- 打包 -->
   <build>
     <plugins>
+      <!--      <plugin>-->
+      <!--        <groupId>org.springframework.boot</groupId>-->
+      <!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+      <!--      </plugin>-->
+      <!--      &lt;!&ndash; 跳过单元测试 &ndash;&gt;-->
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-surefire-plugin</artifactId>-->
+      <!--        <configuration>-->
+      <!--          <skipTests>true</skipTests>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <!-- 跳过单元测试 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
+        <!--        <version>${spring-boot.version}</version>-->
         <configuration>
-          <skipTests>true</skipTests>
+          <mainClass>me.demo.DemoApplication</mainClass>
+          <skip>false</skip>
         </configuration>
+        <executions>
+          <execution>
+            <id>repackage</id>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

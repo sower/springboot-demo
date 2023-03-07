@@ -1,14 +1,9 @@
 # Spring boot demo
 
-- Hot Deploy
-- Spring data jpa
-- Spring boot cache
-
-- Utils
-    - HttpsUtils
-    - CommandUtils
-    - ZipUtils
-
-- Global Exception handler
-- I18n
+- Web
+- Params validation
+- Log4j2
+- JPA
+- Cache
 - Quartz
+- OpenFeign

@@ -8,7 +8,8 @@ import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 /**
- * @description
+ * 样例任务
+ *
  * @date 2022/10/16
  */
 @Slf4j

@@ -1,5 +1,6 @@
 package me.demo.config;
 
+import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.Filter;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import me.demo.constant.Constants;
+import me.demo.utils.BaseContextHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
@@ -39,6 +41,7 @@ public class TraceIdFilter implements Filter {
       traceId = UUID.randomUUID().toString();
     }
     MDC.put(Constants.TRACE_ID, traceId);
+    BaseContextHolder.getContext().setProperties(ImmutableMap.of(Constants.TRACE_ID, traceId));
     log.debug("Create new {} - {}", Constants.TRACE_ID, traceId);
     filterChain.doFilter(request, response);
   }

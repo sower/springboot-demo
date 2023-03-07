@@ -23,7 +23,7 @@ public class Result<T> {
   private T data;
 
   public static <T> Result<T> success(T data) {
-    return new Result<>(CODE_SUCCESS, MessageUtils.getMessage(MSG_SUCCESS), data);
+    return new Result<>(CODE_SUCCESS, I18nUtils.getMessage(MSG_SUCCESS), data);
   }
 
   public static <T> Result<T> success() {
@@ -35,7 +35,7 @@ public class Result<T> {
   }
 
   public static <T> Result<T> failed() {
-    return Result.failed(MessageUtils.getMessage(MSG_FAILED));
+    return Result.failed(I18nUtils.getMessage(MSG_FAILED));
   }
 
   @JsonIgnore
